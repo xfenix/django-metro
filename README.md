@@ -61,4 +61,4 @@ This admin.py adopted for work with SortableStackedInline.
 
 License
 ===================
-BSD probably.
+MIT probably.
