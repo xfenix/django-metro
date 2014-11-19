@@ -1,8 +1,14 @@
 django-moscow-metro
 ===========
 
-Moscow metro structure for django.
-Includes Metro and MetroLine models, and parsers. With this parsers you can download all current metro stations, metro lines with numbers and colors.
+Base metro structure for django.
+Includes Metro and MetroLine models, and parser, that download and fill this models with current data.
+
+Parser downloads the following data:
+- MetroLine: number, color and title
+- Metro: line binding, title
+
+Also you can run django command sometimes to get always actual data.
 
 
 Installing
@@ -25,7 +31,7 @@ And, finally, apply migrations:
     ./manage.py migrate
 
 
-Using
+Data downloading
 ===================
 
 Load current metro lines and stations:
@@ -34,11 +40,9 @@ Load current metro lines and stations:
 
 Or:
 
-    from moscow_metro.models import load as load_all_metro()
+    from moscow_metro.models import load as load_metro_data()
     
-    load_all_metro()
-
-Then you can use some of this methods sometimes (for updating). It's just append all new lines and stations (or removed by you).
+    load_metro_data()
 
 
 Tests

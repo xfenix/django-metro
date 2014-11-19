@@ -34,32 +34,6 @@ class MetroLine(models.Model):
     )
 
     @classmethod
-    def parse(cls):
-        html = BeautifulSoup(requests.get(cls.SOURCE).content)
-        table = html.find('table')
-        lines = dict()
-        for i, row in enumerate(table.find_all('tr')):
-            if i == 0:
-                continue
-            number = 0
-            for j, cell in enumerate(row.find_all('td')):
-                value = cell.string
-                if j == 0:
-                    if value and value.isdigit():
-                        number = int(value)
-                elif j == 1:
-                    title = value
-                elif j == 2:
-                    color = value
-            if number > 0:
-                try:
-                    MetroLine.objects.get(number=number)
-                except MetroLine.DoesNotExist:
-                    MetroLine.objects.create(
-                        number=number, title=title, color='#' + color
-                    )
-
-    @classmethod
     def get_all(cls):
         items = cls.objects.all()
         result = dict()
@@ -133,6 +107,6 @@ class Metro(models.Model):
         verbose_name_plural = u'Станции метро'
 
 
-def load():
+def load_metro_data():
     MetroLine.parse()
     Metro.parse()
