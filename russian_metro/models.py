@@ -9,7 +9,6 @@ logger = logging.getLogger(__name__)
 
 
 class MetroLine(models.Model):
-    SOURCE = u"http://ru.wikipedia.org/wiki/Модуль:MoscowMetro#ColorByNum"
     title = models.CharField(
         max_length=255,
         verbose_name=u'Название'
@@ -57,8 +56,6 @@ class MetroLine(models.Model):
 
 
 class Metro(models.Model):
-    SOURCE = u"http://ru.wikipedia.org/w/index.php?title=\
-               Список_станций_Московского_метрополитена"
     SKIP_STEPS = 2
     line = models.ForeignKey(
         MetroLine,
@@ -73,31 +70,6 @@ class Metro(models.Model):
         default=0,
     )
 
-    @classmethod
-    def parse(cls):
-        html = BeautifulSoup(requests.get(cls.SOURCE).content)
-        table = html.find('table', 'wikitable')
-        lines = MetroLine.get_all()
-        for i, row in enumerate(table.find_all('tr')):
-            if i == 0:
-                continue
-            for j, cell in enumerate(row.find_all('td')):
-                if j == 0:
-                    line = 0
-                    value = cell.find('span', 'sortkey').string
-                    if value and value.isdigit():
-                        line = int(value)
-                elif j == 1:
-                    title = cell.find('span').string
-            try:
-                line_inst = lines[line]
-            except KeyError:
-                logger.warning(
-                    u'MetroLine with number %d does not exist' % line
-                )
-                continue
-            Metro.objects.get_or_create(line=line_inst, title=title)
-
     def __unicode__(self):
         return unicode(self.title)
 
@@ -105,8 +77,3 @@ class Metro(models.Model):
         ordering = ['order']
         verbose_name = u'Станция метро'
         verbose_name_plural = u'Станции метро'
-
-
-def load_metro_data():
-    MetroLine.parse()
-    Metro.parse()
