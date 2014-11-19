@@ -31,7 +31,7 @@ Installing
 
 1. Choose and specify data provider in `settings.py`:
         
-        RUMETRO_CITY = 'moscow'
+        RUMETRO_PROVIDER = 'moscow'
 
 1. Finally, fill models with data:
         
@@ -45,8 +45,8 @@ Installing
 
 Current available data providers
 ===================
-- Moscow (Wikipedia), `RUMETRO_CITY = 'moscow'`
-- Saint Petersburg (Wikipedia), `RUMETRO_CITY = 'spb'`
+- Moscow (Wikipedia), `RUMETRO_PROVIDER = 'moscow'`
+- Saint Petersburg (Wikipedia), `RUMETRO_PROVIDER = 'spb'`
 
 
 License

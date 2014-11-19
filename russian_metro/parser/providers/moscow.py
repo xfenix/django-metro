@@ -10,7 +10,6 @@ class DataProvider(BaseDataProvider):
     def download_lines(self):
         html = BeautifulSoup(requests.get(self.metro_lines_src).content)
         table = html.find('table')
-        lines = dict()
         for i, row in enumerate(table.find_all('tr')):
             if i == 0:
                 continue

@@ -23,12 +23,18 @@ class DataProvider(BaseDataProvider):
                     line_number = matches.group(1)
                     line_title = matches.group(2)
                     if not line_number in lines:
-                        self.line_model.objects.create(
+                        line = self.line_model.objects.create(
                             number=line_number,
                             color=line_color,
                             title=line_title
                         )
+                    else:
+                        line = lines[line_number]
                     # extract stations
                     stations_ul = header.parent.find_next_sibling('ul')
                     for item in stations_ul.find_all('li'):
-                        print item.string
+                        self.station_model.objects\
+                            .get_or_create(
+                                title=item.string,
+                                line=line
+                            )

@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
-import logging
 import requests
 from django.db import models
 from bs4 import BeautifulSoup
-
-
-logger = logging.getLogger(__name__)
 
 
 class MetroLine(models.Model):
@@ -56,7 +52,6 @@ class MetroLine(models.Model):
 
 
 class Metro(models.Model):
-    SKIP_STEPS = 2
     line = models.ForeignKey(
         MetroLine,
         verbose_name=u'Линия метро'

@@ -16,15 +16,12 @@ class BaseDataProvider(object):
                 u'You need to provide base station and line models'
             )
 
-    @classmethod
     def download_all(self):
         self.download_lines()
         self.download_stations()
 
-    @classmethod
     def download_lines(self):
         pass
 
-    @classmethod
     def download_stations(self):
         pass
