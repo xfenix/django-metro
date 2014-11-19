@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+import requests
+from bs4 import BeautifulSoup
+
 from russian_metro.parser.base import BaseDataProvider
 
 

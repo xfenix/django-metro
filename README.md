@@ -1,7 +1,7 @@
 django-russian-metro
 ===================
 
-Russian metro models for django, plus the parser that fills models with actual data from various data providers (primary - Wikipedia).
+Russian metro models for django (only for 1.7+), plus the parser that fills models with actual data from various data providers (primary - Wikipedia).
 
 Parser downloads the following data:
 - MetroLine: number, color and title
@@ -49,6 +49,16 @@ Current available data providers
 - Saint Petersburg (Wikipedia), `RUMETRO_PROVIDER = 'spb'`
 
 
+Other stuff
+===================
+You can rename application title with `RUMETRO_APP_TITLE` in your `settings.py`:
+
+    RUMETRO_APP_TITLE = u'Saint Petersrburg Metro'
+
+I reccomend use it with `django-suit`.
+This admin.py adopted for work with SortableStackedInline.
+
+
 License
 ===================
-Who cares? Use it whatever you want.
+BSD probably.

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
 from setuptools import setup, find_packages
-from moscow_metro import __version__
+from russian_metro import __version__
 
 
 def read(fname):
@@ -11,7 +11,7 @@ def read(fname):
 setup(
     name='django-russian-metro',
     version=__version__,
-    description="""Russian metro models for django, \
+    description="""Russian metro models for Django 1.7+, \
     plus the parser that fills models with actual data \
     (lines numbers, lines titles, lines colors, the names \
     of the lines, the station names) from various data \
@@ -34,6 +34,7 @@ setup(
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
     ],
+    zip_safe=True,
     install_requires=[
         'Django>=1.7',
         'BeautifulSoup',
