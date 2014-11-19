@@ -1,8 +1,7 @@
-django-moscow-metro
-===========
+django-russian-metro
+===================
 
-Base metro structure for django.
-Includes Metro and MetroLine models, and parser, that download and fill this models with current data.
+Russian metro models for django, plus the parser that fills models with actual data from various data providers (primary - Wikipedia).
 
 Parser downloads the following data:
 - MetroLine: number, color and title
@@ -12,42 +11,42 @@ Also you can run django command sometimes to get always actual data.
 
 
 Installing
-==========
+===================
 
-For install django-moscow-metro, run on terminal: ::
+1. For install django-russian-metro, run on terminal:
 
-    $ pip install django-moscow-metro
+        $ pip install django-russian-metro
 
-Then add this app to ``INSTALLED_APPS``:
+1. Then add this app to ``INSTALLED_APPS``:
 
-    INSTALLED_APPS = (
-        ...
-        'moscow_metro',
-        ...
-    )
+        INSTALLED_APPS = (
+            ...
+            'russian_metro',
+            ...
+        )
 
-And, finally, apply migrations:
+1. Apply migrations:
   
-    ./manage.py migrate
+        ./manage.py migrate
+
+1. Choose and specify data provider in `settings.py`:
+        
+        RUMETRO_CITY = 'moscow'
+
+1. Finally, fill models with data:
+        
+        ./manage.py load_metro
+   
+   Or:
+
+        from russian_metro.parser import provider
+        provider.download_all()
 
 
-Data downloading
+Current available data providers
 ===================
-
-Load current metro lines and stations:
-
-    ./manage.py load_metro
-
-Or:
-
-    from moscow_metro.models import load as load_metro_data()
-    
-    load_metro_data()
-
-
-Tests
-===================
-Soon
+- Moscow (Wikipedia), `RUMETRO_CITY = 'moscow'`
+- Saint Petersburg (Wikipedia), `RUMETRO_CITY = 'spb'`
 
 
 License

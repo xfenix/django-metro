@@ -5,15 +5,21 @@ from setuptools import setup, find_packages
 from moscow_metro import __version__
 
 
+simple_description = """Russian metro models for django, \
+plus the parser that fills models with actual data \
+(lines numbers, lines titles, lines colors, the names of the lines, the station names) \
+from various data providers (primary - Wikipedia).
+"""
+
 try:
     readme = open('README.md').read()
 except:
-    readme = 'Moscow metro for django'
+    readme = simple_description
 
 setup(
     name='django-moscow-metro',
     version=__version__,
-    description='Moscow metro for django',
+    description=simple_description,
     long_description=readme,
     author='Xfenix',
     author_email='ad@xfenix.ru',

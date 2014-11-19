@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from moscow_metro.parser.base import BaseDataProvider
+from russian_metro.parser.base import BaseDataProvider
 
 
 class DataProvider(BaseDataProvider):

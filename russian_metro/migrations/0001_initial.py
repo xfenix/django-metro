@@ -43,7 +43,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='metro',
             name='line',
-            field=models.ForeignKey(verbose_name='\u041b\u0438\u043d\u0438\u044f \u043c\u0435\u0442\u0440\u043e', to='moscow_metro.MetroLine'),
+            field=models.ForeignKey(verbose_name='\u041b\u0438\u043d\u0438\u044f \u043c\u0435\u0442\u0440\u043e', to='russian_metro.MetroLine'),
             preserve_default=True,
         ),
     ]

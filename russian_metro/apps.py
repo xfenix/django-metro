@@ -3,5 +3,5 @@ from django.apps import AppConfig
 
 
 class MoscowMetroConfig(AppConfig):
-    name = u'moscow_metro'
+    name = u'russian_metro'
     verbose_name = u'Московское метро'

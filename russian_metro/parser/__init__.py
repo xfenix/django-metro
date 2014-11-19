@@ -2,10 +2,10 @@
 from importlib import import_module
 from django.conf import settings
 
-from moscow_metro.models import Metro, MetroLine
+from russian_metro.models import Metro, MetroLine
 
 
-providers_path = 'moscow_metro.parser.providers'
+providers_path = 'russian_metro.parser.providers'
 metro_city = None
 provider = None
 
