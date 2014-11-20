@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import requests
 from django.db import models
-from bs4 import BeautifulSoup
 
 
 class MetroLine(models.Model):

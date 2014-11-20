@@ -37,7 +37,7 @@ setup(
     zip_safe=True,
     install_requires=[
         'Django>=1.7',
-        'BeautifulSoup',
+        'BeautifulSoup4',
         'requests',
     ],
 )
