@@ -47,6 +47,8 @@ Current available data providers
 ===================
 - Moscow (Wikipedia), `RUMETRO_PROVIDER = 'moscow'`
 - Saint Petersburg (Wikipedia), `RUMETRO_PROVIDER = 'spb'`
+- Minsk (Wikipedia), `RUMETRO_PROVIDER = 'minsk'`
+- Kiev (Wikipedia), `RUMETRO_PROVIDER = 'kiev'`
 
 
 Other stuff
