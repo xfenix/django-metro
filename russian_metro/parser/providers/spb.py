@@ -40,8 +40,4 @@ class DataProvider(BaseDataProvider):
                     stations_ul = header.parent.parent.find_next_sibling('ul')
                     if stations_ul:
                         for item in stations_ul.find_all('li'):
-                            self.station_model.objects\
-                                .get_or_create(
-                                    title=item.string,
-                                    line=line
-                                )
+                            self.get_or_create_station(line, item.string)

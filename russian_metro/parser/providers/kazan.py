@@ -8,7 +8,7 @@ from russian_metro.parser.base import BaseDataProvider
 
 class DataProvider(BaseDataProvider):
     metro_data_src = u"http://ru.wikipedia.org/wiki/\
-                       Список_станций_Новосибирского_метрополитена"
+                       Список_станций_Казанского_метрополитена"
 
     def download_all(self):
         self.parse_usual_big_table()

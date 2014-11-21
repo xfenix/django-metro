@@ -27,12 +27,7 @@ class DataProvider(BaseDataProvider):
                 elif j == 2:
                     color = value
             if number > 0:
-                self.line_model.objects.get_or_create(
-                    number=number,
-                    defaults=dict(
-                        title=title, color='#' + color
-                    )
-                )
+                self.get_or_create_line(number, title, '#' + color)
 
     def download_stations(self):
         html = BeautifulSoup(requests.get(self.metro_stations_src).content)
@@ -53,6 +48,4 @@ class DataProvider(BaseDataProvider):
                 line_inst = lines[line]
             except KeyError:
                 continue
-            self.station_model\
-                .objects\
-                .get_or_create(line=line_inst, title=title)
+            self.get_or_create_station(line_inst, title)
