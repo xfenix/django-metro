@@ -27,5 +27,4 @@ class DataProvider(BaseDataProvider):
                 for tr in all_trs:
                     tds = tr.find_all('td', recursive=False)
                     if len(tds) == self.td_count:
-                        station_title = tds[0].get_text()
                         self.get_or_create_station(line, tds[0])
