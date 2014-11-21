@@ -85,13 +85,17 @@ class BaseDataProvider(object):
             return ''
 
     # universal cases
-    def parse_usual_big_table(self, station_td_count=None):
+    def parse_usual_big_table(self, station_td_count=None, table_number=None):
         i = 0
         line = None
         html = self.create_dom(self.metro_data_src)
         # search only in body
         body = html.find(id='mw-content-text')
-        table = body.find('table')
+        if table_number:
+            table = body.find_all('table')[table_number]
+        else:
+            table = body.find('table')
+        # get tbody instead of table, if exist
         tbody = table.find('tbody', recursive=False)
         if tbody:
             table = tbody
