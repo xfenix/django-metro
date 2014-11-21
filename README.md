@@ -43,8 +43,9 @@ Installing
         provider.download_all()
 
 
-Current available data providers (list updated)
+Current available data providers
 ===================
+##### (list updated)
 Assign `RUMETRO_PROVIDER` (in settings.py) one of the values below:
 - `'moscow'` -- Moscow (Wiki)
 - `'spb'` -- Saint Petersburg (Wiki)
