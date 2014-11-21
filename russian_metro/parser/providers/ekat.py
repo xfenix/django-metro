@@ -9,6 +9,16 @@ from russian_metro.parser.base import BaseDataProvider
 class DataProvider(BaseDataProvider):
     metro_data_src = u"http://ru.wikipedia.org/wiki/\
                        Список_станций_Екатеринбургского_метрополитена"
+    unknown = u'неизвестн'
 
     def download_all(self):
-        self.parse_usual_big_table(table_number=2)
+        html = self.create_dom(self.metro_data_src)
+        # i dont want to parse this station, im tired
+        line = self.get_or_create_line(1, u'Первая', 'green')
+        # get stations
+        table = html.find('table', class_='wide')
+        for cell in table.find_all('tr'):
+            tds = cell.find_all('td', recursive=False)
+            if tds and len(tds) > 1:
+                if tds[1].get_text().find(self.unknown) == -1:
+                    self.get_or_create_station(line, tds[0])

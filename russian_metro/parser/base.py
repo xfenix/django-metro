@@ -14,7 +14,8 @@ class BaseDataProvider(object):
     # various parser stuff
     line_word = u'линия'
     bg_word = 'background:'
-    clean_title_re = re.compile(ur'\s*\(.*\)')
+    without_brackets_re = re.compile(ur'\s*\(.*\)')
+    clean_title_re = re.compile(ur'[^0-9a-zа-я\s\.,-_]*', re.U | re.I)
 
     # main methods
     def __init__(self, station_model=None, line_model=None):
@@ -74,7 +75,13 @@ class BaseDataProvider(object):
 
     def prep_title(self, el):
         return self.clean_title_re.sub(
-            '', self.get_el_text(el).replace(self.line_word, '').strip()
+            '',
+            self.without_brackets_re.sub(
+                '', 
+                self.get_el_text(el)\
+                    .replace(self.line_word, '')\
+                    .strip()
+            )
         )
 
     def prep_color(self, el):
