@@ -52,9 +52,6 @@ class DataProvider(BaseDataProvider):
             try:
                 line_inst = lines[line]
             except KeyError:
-                logger.warning(
-                    u'MetroLine with number %d does not exist' % line
-                )
                 continue
             self.station_model\
                 .objects\

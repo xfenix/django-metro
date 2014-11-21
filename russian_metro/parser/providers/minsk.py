@@ -51,9 +51,4 @@ class DataProvider(BaseDataProvider):
                     if item in line_trs:
                         break
                     if len(item.find_all('td')) == self.title_td_count:
-                        self.station_model\
-                            .objects\
-                            .get_or_create(
-                                title=item.find('td').get_text(),
-                                line=line
-                            )
+                        self.get_or_create_station(line, item.find('td'))

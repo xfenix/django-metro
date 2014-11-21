@@ -52,3 +52,6 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# various
+russian_metro/parser/providers/debug.py

@@ -45,10 +45,14 @@ Installing
 
 Current available data providers
 ===================
-- Moscow (Wikipedia), `RUMETRO_PROVIDER = 'moscow'`
-- Saint Petersburg (Wikipedia), `RUMETRO_PROVIDER = 'spb'`
-- Minsk (Wikipedia), `RUMETRO_PROVIDER = 'minsk'`
-- Kiev (Wikipedia), `RUMETRO_PROVIDER = 'kiev'`
+Set `RUMETRO_PROVIDER` to one of the following options:
+- Moscow (Wikipedia), 'moscow'
+- Saint Petersburg (Wikipedia), 'spb'
+- Nizhny Novgorod (Wikipedia), 'novgorod'
+- Novosibirsk (Wikipedia), 'novosib'
+- Kiev (Wikipedia), 'kiev'
+- Minsk (Wikipedia), 'minsk'
+- Omsk, 'omsk' :)
 
 
 Other stuff
