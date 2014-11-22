@@ -15,40 +15,39 @@ Also you can run django command sometimes to get always actual data.
 Installing
 ============
 
-#) For install django-russian-metro, run on terminal:
-
+1. For install django-russian-metro, run on terminal:
 .. code-block:: bash
-        $ pip install django-russian-metro
+    $ pip install django-russian-metro
 
-#) Then add this app to ``INSTALLED_APPS``:
+2. Then add this app to ``INSTALLED_APPS``:
 
 .. code-block:: python
-        INSTALLED_APPS = (
-            ...
-            'russian_metro',
-            ...
-        )
+    INSTALLED_APPS = (
+        ...
+        'russian_metro',
+        ...
+    )
 
-#) Apply migrations:
+3. Apply migrations:
   
 .. code-block:: bash
-        ./manage.py migrate
+    ./manage.py migrate
 
-#) Choose and specify data provider in ``settings.py1. ``:
+4. Choose and specify data provider in ``settings.py``:
 
 .. code-block:: python        
-        RUMETRO_PROVIDER = 'moscow'
+    RUMETRO_PROVIDER = 'moscow'
 
-#) Finally, fill models with data:
+5. Finally, fill models with data:
 
 .. code-block:: python
-        ./manage.py load_metro
+    ./manage.py load_metro
    
    Or:
 
 .. code-block:: python
-        from russian_metro.parser import provider
-        provider.download_all()
+    from russian_metro.parser import provider
+    provider.download_all()
 
 
 ============
