@@ -16,7 +16,9 @@ Installing
 ============
 
 1. For install django-russian-metro, run on terminal:
+
 .. code-block:: bash
+
     $ pip install django-russian-metro
 
 2. Then add this app to ``INSTALLED_APPS``:
