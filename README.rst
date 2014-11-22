@@ -34,7 +34,7 @@ Installing
 .. code-block:: bash
         ./manage.py migrate
 
-#) Choose and specify data provider in ``settings.py``:
+#) Choose and specify data provider in ``settings.py1. ``:
 
 .. code-block:: python        
         RUMETRO_PROVIDER = 'moscow'
@@ -54,9 +54,10 @@ Installing
 ============
 Current available data providers
 ============
-(list updated)
------------------
+**(list updated)**
+
 Assign ``RUMETRO_PROVIDER`` (in settings.py) one of the values below:
+
 - ``'moscow'`` -- Moscow (Wiki)
 - ``'spb'`` -- Saint Petersburg (Wiki)
 - ``'novgorod'`` -- Nizhny Novgorod (Wiki)
