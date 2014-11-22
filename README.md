@@ -1,7 +1,8 @@
 django-russian-metro
 ==============
 
-Russian metro models for django (only for 1.7+), plus the parser that fills models with actual data from various data providers (primary - Wikipedia).
+Russian/CIS metro models for Django (only for 1.7+), plus the parser that fills
+models with actual data from various data providers (primary - Wikipedia).
 
 Parser downloads the following data:
 - MetroLine: number, color and title
@@ -26,18 +27,18 @@ Installing
         )
 
 1. Apply migrations:
-  
+
         ./manage.py migrate
 
 1. Choose and specify data provider in `settings.py`:
-        
+
         RUMETRO_PROVIDER = 'moscow'
 
 1. Finally, fill models with data:
-        
+
         ./manage.py load_metro
-   
-   Or:
+
+1. Or:
 
         from russian_metro.parser import provider
         provider.download_all()
@@ -47,6 +48,7 @@ Current available data providers
 ==============
 ##### (list updated)
 Assign `RUMETRO_PROVIDER` (in settings.py) one of the values below:
+
 - `'moscow'` -- Moscow (Wiki)
 - `'spb'` -- Saint Petersburg (Wiki)
 - `'novgorod'` -- Nizhny Novgorod (Wiki)
