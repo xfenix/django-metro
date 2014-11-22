@@ -49,7 +49,7 @@ Installing
 
     ./manage.py load_metro
    
-   Or:
+Or:
 
 .. code-block:: python
 
