@@ -3,6 +3,8 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
+from django.utils.translation import get_language
+from transliterate import translit
 
 
 class BaseDataProvider(object):
@@ -16,12 +18,17 @@ class BaseDataProvider(object):
     bg_word = 'background:'
     without_brackets_re = re.compile(ur'\s*\(.*\)')
     clean_title_re = re.compile(ur'[^0-9a-zа-я\s\.,-_]*', re.U | re.I)
+    lang = None
+    # most of metro in this app are russian, so,
+    # for english locale this is the best way
+    need_translit = True
 
     # main methods
     def __init__(self, station_model=None, line_model=None):
         if station_model and line_model:
             self.station_model = station_model
             self.line_model = line_model
+            self.lang = get_language()
         else:
             raise AttributeError(
                 u'You need to provide base station and line models'
@@ -74,13 +81,15 @@ class BaseDataProvider(object):
         return el.get_text() if isinstance(el, Tag) else unicode(el)
 
     def prep_title(self, el):
-        return self.clean_title_re.sub(
-            '',
-            self.without_brackets_re.sub(
-                '', 
-                self.get_el_text(el)\
-                    .replace(self.line_word, '')\
-                    .strip()
+        return self.translit(
+            self.clean_title_re.sub(
+                '',
+                self.without_brackets_re.sub(
+                    '',
+                    self.get_el_text(el)\
+                        .replace(self.line_word, '')\
+                        .strip()
+                )
             )
         )
 
@@ -90,6 +99,11 @@ class BaseDataProvider(object):
                 .replace(self.bg_word, '').strip()
         except KeyError:
             return ''
+
+    def translit(self, el):
+        if self.need_translit and 'ru' not in self.lang:
+            return translit(el, reversed=True).replace("'", "")
+        return el
 
     # universal cases
     def parse_usual_big_table(self, station_td_count=None, table_number=None):
