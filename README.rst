@@ -24,6 +24,7 @@ Installing
 2. Then add this app to ``INSTALLED_APPS``:
 
 .. code-block:: python
+
     INSTALLED_APPS = (
         ...
         'russian_metro',
@@ -33,21 +34,25 @@ Installing
 3. Apply migrations:
   
 .. code-block:: bash
+
     ./manage.py migrate
 
 4. Choose and specify data provider in ``settings.py``:
 
 .. code-block:: python        
+
     RUMETRO_PROVIDER = 'moscow'
 
 5. Finally, fill models with data:
 
 .. code-block:: python
+
     ./manage.py load_metro
    
    Or:
 
 .. code-block:: python
+
     from russian_metro.parser import provider
     provider.download_all()
 
@@ -77,6 +82,7 @@ Other stuff
 You can rename application title with `RUMETRO_APP_TITLE` in your ``settings.py``:
 
 .. code-block:: python
+
     RUMETRO_APP_TITLE = u'Saint Petersrburg Metro'
 
 I reccomend use it with ``django-suit``.
