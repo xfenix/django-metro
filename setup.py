@@ -36,5 +36,6 @@ setup(
         'Django>=1.7',
         'BeautifulSoup4',
         'requests',
+        'transliterate',
     ],
 )
