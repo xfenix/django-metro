@@ -3,10 +3,10 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from russian_metro.parser.base import BaseDataProvider
+from metro.parser.base import BaseRuDataProvider
 
 
-class DataProvider(BaseDataProvider):
+class DataProvider(BaseRuDataProvider):
     metro_data_src = u"http://ru.wikipedia.org/wiki/\
                        Список_станций_Екатеринбургского_метрополитена"
     unknown = u'неизвестн'

@@ -2,16 +2,16 @@
 import requests
 from bs4 import BeautifulSoup
 
-from russian_metro.parser.base import BaseDataProvider
+from metro.parser.base import BaseRuDataProvider
 
 
-class DataProvider(BaseDataProvider):
+class DataProvider(BaseRuDataProvider):
     metro_lines_src = u"http://ru.wikipedia.org/wiki/Модуль:MoscowMetro#ColorByNum"
     metro_stations_src = u"http://ru.wikipedia.org/w/index.php?title=\
                            Список_станций_Московского_метрополитена"
 
     def download_lines(self):
-        html = BeautifulSoup(requests.get(self.metro_lines_src).content)
+        html = self.create_dom(self.metro_lines_src)
         table = html.find('table')
         for i, row in enumerate(table.find_all('tr')):
             if i == 0:
@@ -30,7 +30,7 @@ class DataProvider(BaseDataProvider):
                 self.get_or_create_line(number, title, '#' + color)
 
     def download_stations(self):
-        html = BeautifulSoup(requests.get(self.metro_stations_src).content)
+        html = self.create_dom(self.metro_stations_src)
         table = html.find('table', 'wikitable')
         lines = self.line_model.get_all()
         for i, row in enumerate(table.find_all('tr')):

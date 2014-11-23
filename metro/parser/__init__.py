@@ -2,15 +2,15 @@
 from importlib import import_module
 from django.conf import settings
 
-from russian_metro.models import Metro, MetroLine
+from metro.models import Metro, MetroLine
 
 provider = None
 
 # import data provider
 try:
     module = import_module(
-        'russian_metro.parser.providers.%s' % (
-            getattr(settings, 'RUMETRO_PROVIDER', u'moscow').lower()
+        'metro.parser.providers.%s' % (
+            getattr(settings, 'METRO_PROVIDER', 'moscow').lower()
         )
     )
     provider = module.DataProvider(

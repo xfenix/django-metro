@@ -4,26 +4,22 @@ import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from django.utils.translation import get_language
-from transliterate import translit
 
 
 class BaseDataProvider(object):
-    """ basic data provider
+    """ Basic data provider
+    with base methods, helpers and universal parsers
     """
     # base models
     line_model = None
     station_model = None
     # various parser stuff
-    line_word = u'линия'
     bg_word = 'background:'
     without_brackets_re = re.compile(ur'\s*\(.*\)')
-    clean_title_re = re.compile(ur'[^0-9a-zа-я\s\.,-_]*', re.U | re.I)
     lang = None
-    # most of metro in this app are russian, so,
-    # for english locale this is the best way
-    need_translit = True
 
-    # main methods
+    """ main methods
+    """
     def __init__(self, station_model=None, line_model=None):
         if station_model and line_model:
             self.station_model = station_model
@@ -44,7 +40,8 @@ class BaseDataProvider(object):
     def download_stations(self):
         pass
 
-    # helper methods
+    """ helper methods
+    """
     def create_dom(self, url):
         get = lambda: BeautifulSoup(requests.get(url).content)
         try:
@@ -80,8 +77,25 @@ class BaseDataProvider(object):
     def get_el_text(self, el):
         return el.get_text() if isinstance(el, Tag) else unicode(el)
 
+    def prep_color(self, el):
+        try:
+            element = el['style'] if isinstance(el, Tag) else el
+            return element\
+                .replace(self.bg_word, '')\
+                .replace(';', '')\
+                .strip()
+        except KeyError:
+            return ''
+
+
+class BaseRuDataProvider(BaseDataProvider):
+    """ Basic data provider for ru lang
+    """
+    line_word = u'линия'
+    clean_title_re = re.compile(ur'[^а-яА-ЯёЁa-zA-Z0-9\s\.,-_]*', re.U | re.I)
+
     def prep_title(self, el):
-        return self.translit(
+        return self.translit_if_needed(
             self.clean_title_re.sub(
                 '',
                 self.without_brackets_re.sub(
@@ -93,19 +107,38 @@ class BaseDataProvider(object):
             )
         )
 
-    def prep_color(self, el):
-        try:
-            return ( el['style'] if isinstance(el, Tag) else el)\
-                .replace(self.bg_word, '').strip()
-        except KeyError:
-            return ''
-
-    def translit(self, el):
-        if self.need_translit and 'ru' not in self.lang:
-            return translit(el, reversed=True).replace("'", "")
+    def translit_if_needed(self, el):
+        if 'ru' not in self.lang:
+            return self.transliterate(el)
         return el
 
-    # universal cases
+    def transliterate(self, s):
+        # reduce requirements
+        repl_dict = {
+            # upper
+            u'А': u'A', u'Б': u'B', u'В': u'V', u'Г': u'G', u'Д': u'D',
+            u'Е': u'E', u'Ё': u'Yo', u'З': u'Z', u'И': u'I', u'Й': u'Y',
+            u'К': u'K', u'Л': u'L', u'М': u'M', u'Н': u'N', u'О': u'O',
+            u'П': u'P', u'Р': u'R', u'С': u'S', u'Т': u'T', u'У': u'U',
+            u'Ф': u'F', u'Х': u'H', u'Ъ': u'', u'Ы': u'Y', u'Ь': u'',
+            u'Э': u'E', u'Ж': u'Zh',  u'Ц': u'Ts', u'Ч': u'Ch', u'Ш': u'Sh',
+            u'Щ': u'Sch', u'Ю': u'Yu', u'Я': u'Ya',
+            # lower
+            u'а': u'a', u'б': u'b', u'в': u'v', u'г': u'g',
+            u'д': u'd', u'е': u'e', u'ё': u'yo', u'ж': u'zh', u'з': u'z',
+            u'и': u'i', u'й': u'y', u'к': u'k', u'л': u'l', u'м': u'm',
+            u'н': u'n', u'о': u'o', u'п': u'p', u'р': u'r', u'с': u's',
+            u'т': u't', u'у': u'u', u'ф': u'f', u'х': u'h', u'ц': u'ts',
+            u'ч': u'ch', u'ш': u'sh', u'щ': u'sch', u'ъ': u'', u'ы': u'y',
+            u'ь': u'', u'э': u'e', u'ю': u'yu', u'я': u'ya',
+        }
+        for key in repl_dict:
+            s = s.replace(key, repl_dict[key])
+        return s
+
+    """ universal cases
+    """
+    # case with one big table, containing all lines and stations
     def parse_usual_big_table(self, station_td_count=None, table_number=None):
         i = 0
         line = None
@@ -140,3 +173,17 @@ class BaseDataProvider(object):
                         if count != station_td_count:
                             continue
                     self.get_or_create_station(line, td)
+
+
+class BaseEnDataProvider(BaseDataProvider):
+    """ Basic data provider for en lang
+    """
+    base_en_url = u'http://en.wikipedia.org'
+    without_sbrackets_re = re.compile(ur'\s*\[.*\]')
+
+    def prep_title(self, el):
+        return self.without_brackets_re.sub(
+            '', self.without_sbrackets_re.sub(
+                '', self.get_el_text(el).strip()
+            )
+        )

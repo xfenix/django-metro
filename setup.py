@@ -1,20 +1,29 @@
 # -*- coding: utf-8 -*-
-import os
-import pypandoc
 from setuptools import setup, find_packages
-from russian_metro import __version__
+from metro import __version__
+
+
+readme = 'README.md'
+try:
+    import pypandoc
+    read = lambda: pypandoc.convert(readme, 'rst')
+except ImportError:
+    import os
+    read = lambda: os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), readme
+    )
 
 
 setup(
-    name='django-russian-metro',
+    name='django-metro',
     version=__version__,
-    description="""Russian/CIS metro models for Django 1.7+, \
+    description="""Basic metro models for Django 1.7+, \
     plus the parser that fills models with actual data \
     (lines numbers, lines titles, lines colors, the names \
     of the lines, the station names) from various data \
     sources (primary - Wikipedia).
     """,
-    long_description=lambda: pypandoc.convert('README.md', 'rst'),
+    long_description=read(),
     url='https://github.com/xfenix/django-russian-metro',
     author='Xfenix',
     author_email='ad@xfenix.ru',
@@ -36,6 +45,5 @@ setup(
         'Django>=1.7',
         'BeautifulSoup4',
         'requests',
-        'transliterate',
     ],
 )

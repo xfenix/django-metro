@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from russian_metro.parser.base import BaseDataProvider
+from metro.parser.base import BaseRuDataProvider
 
 
-class DataProvider(BaseDataProvider):
+class DataProvider(BaseRuDataProvider):
     def download_all(self):
         # yeap, Omsk
         self.get_or_create_station(

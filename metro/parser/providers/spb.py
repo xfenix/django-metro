@@ -3,10 +3,10 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-from russian_metro.parser.base import BaseDataProvider
+from metro.parser.base import BaseRuDataProvider
 
 
-class DataProvider(BaseDataProvider):
+class DataProvider(BaseRuDataProvider):
     metro_data_src = u"http://ru.wikipedia.org/wiki/\
                        Линии_и_станции_Петербургского_метрополитена"
     header_marker = u'линия'
@@ -14,7 +14,7 @@ class DataProvider(BaseDataProvider):
     title_re = re.compile(ur'.*?(\d{1,2}).*?\((.*?)\)', re.U | re.S)
 
     def download_all(self):
-        html = BeautifulSoup(requests.get(self.metro_data_src).content)
+        html = self.create_dom(self.metro_data_src)
         headers = html.find_all(class_='mw-headline')
         lines = self.line_model.get_all()
         for row in headers:

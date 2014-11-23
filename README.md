@@ -1,8 +1,13 @@
-django-russian-metro
+django-metro
 ==============
 
-Russian/CIS metro models for Django (only for 1.7+), plus the parser that fills
+Metro models for Django (only for 1.7+), plus the parser that fills
 models with actual data from various data providers (primary - Wikipedia).
+This is renamed django-russian-metro package (!).
+
+All russian and cis parsers (like kiev or minsk) respects locale, that's why
+for en locale they returns transliterated version of names.
+Parsers for the other cities takes only english names.
 
 Parser downloads the following data:
 - MetroLine: number, color and title
@@ -14,15 +19,15 @@ Also you can run django command sometimes to get always actual data.
 Installing
 ==============
 
-1. For install django-russian-metro, run on terminal:
+1. For install django-metro, run on terminal:
 
-        $ pip install django-russian-metro
+        $ pip install django-metro
 
 1. Then add this app to ``INSTALLED_APPS``:
 
         INSTALLED_APPS = (
             ...
-            'russian_metro',
+            'metro',
             ...
         )
 
@@ -32,7 +37,7 @@ Installing
 
 1. Choose and specify data provider in `settings.py`:
 
-        RUMETRO_PROVIDER = 'moscow'
+        METRO_PROVIDER = 'moscow'
 
 1. Finally, fill models with data:
 
@@ -40,15 +45,16 @@ Installing
 
 1. Or:
 
-        from russian_metro.parser import provider
+        from metro.parser import provider
         provider.download_all()
 
 
 Current available data providers
 ==============
 ##### (list updated)
-Assign `RUMETRO_PROVIDER` (in settings.py) one of the values below:
+Assign `METRO_PROVIDER` (in settings.py) one of the values below (source indicated in brackets):
 
+##### Russia
 - `'moscow'` -- Moscow (Wiki)
 - `'spb'` -- Saint Petersburg (Wiki)
 - `'novgorod'` -- Nizhny Novgorod (Wiki)
@@ -56,16 +62,22 @@ Assign `RUMETRO_PROVIDER` (in settings.py) one of the values below:
 - `'ekat'` -- Yekaterinburg (Wiki/self)
 - `'kazan'` -- Kazan (Wiki)
 - `'samara'` -- Samara (Wiki)
+- `'omsk'` -- Omsk (self) :)
+
+##### CIS
 - `'kiev'` -- Kiev (Wiki)
 - `'minsk'` -- Minsk (Wiki)
-- `'omsk'` -- Omsk (self) :)
+
+##### World
+- `'tokyo'` -- Tokyo (Wiki)
+- `'london'` -- London (Wiki), very basic (without zones and branches)
 
 
 Other stuff
 ==============
-You can rename application title with `RUMETRO_APP_TITLE` in your `settings.py`:
+You can rename application title with `METRO_APP_TITLE` in your `settings.py`:
 
-    RUMETRO_APP_TITLE = u'Saint Petersrburg Metro'
+    METRO_APP_TITLE = u'Saint Petersrburg Metro'
 
 I reccomend use it with `django-suit`.
 This admin.py adopted for work with SortableStackedInline.
