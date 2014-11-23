@@ -24,8 +24,8 @@ setup(
     sources (primary - Wikipedia).
     """,
     long_description=read(),
-    url='https://github.com/xfenix/django-russian-metro',
-    author='Xfenix',
+    url='https://github.com/xfenix/django-metro',
+    author='Denis Anikin',
     author_email='ad@xfenix.ru',
     packages=find_packages(),
     include_package_data=True,

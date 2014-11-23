@@ -10,6 +10,7 @@ for en locale they returns transliterated version of names.
 Parsers for the other cities takes only english names.
 
 Parser downloads the following data:
+
 - MetroLine: number, color and title
 - Metro: line binding, title
 
