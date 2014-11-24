@@ -49,6 +49,8 @@ Installing
         from metro.parser import provider
         provider.download_all()
 
+1. Or use celery task `load_metro` (shared task in `tasks.py`)
+
 
 Current available data providers
 ==============
