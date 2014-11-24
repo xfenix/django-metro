@@ -7,7 +7,7 @@ This is renamed django-russian-metro package (!).
 
 All russian and cis parsers (like kiev or minsk) respects locale, that's why
 for en locale they returns transliterated version of names.
-Parsers for the other cities takes only english names.
+Parsers for other cities takes only english names.
 
 Parser downloads the following data:
 
