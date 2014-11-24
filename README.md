@@ -80,8 +80,7 @@ You can rename application title with `METRO_APP_TITLE` in your `settings.py`:
 
     METRO_APP_TITLE = u'Saint Petersrburg Metro'
 
-I reccomend use it with `django-suit`.
-This admin.py adopted for work with SortableStackedInline.
+Adopted for django-suit (SortableStackedInline).
 
 
 License
