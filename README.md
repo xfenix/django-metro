@@ -14,7 +14,7 @@ Parser downloads the following data:
 - MetroLine: number, color and title
 - Metro: line binding, title
 
-Also you can run django command sometimes to get always actual data.
+Also you can run django command sometimes to get always actual data, or use celery task load_metro.
 
 
 Installing
