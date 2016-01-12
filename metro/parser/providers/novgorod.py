@@ -7,7 +7,7 @@ from metro.parser.base import BaseRuDataProvider
 
 
 class DataProvider(BaseRuDataProvider):
-    metro_data_src = u"http://ru.wikipedia.org/wiki/\
+    metro_data_src = "http://ru.wikipedia.org/wiki/\
                        Список_станций_Нижегородского_метрополитена"
     td_count = 4
 

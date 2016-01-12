@@ -7,4 +7,4 @@ from metro.parser import provider
 class Command(BaseCommand):
     def handle(self, *args, **options):
         provider.download_all()
-        print 'Done'
+        print('Done')

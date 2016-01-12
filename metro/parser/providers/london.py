@@ -7,7 +7,7 @@ from metro.parser.base import BaseEnDataProvider
 
 
 class DataProvider(BaseEnDataProvider):
-    metro_lines_src = u"%s/wiki/London_Underground" % BaseEnDataProvider.base_en_url
+    metro_lines_src = "%s/wiki/London_Underground" % BaseEnDataProvider.base_en_url
     lines_buf = []
 
     def download_lines(self):
@@ -36,7 +36,7 @@ class DataProvider(BaseEnDataProvider):
             line_inst = self.get_or_create_line(
                 line['number'], line['title'], line['color']
             )
-            print u'Download stations for line number %s' % line['number']
+            print('Download stations for line number %s' % line['number'])
             # download stations
             url = BaseEnDataProvider.base_en_url + line['url']
             html = self.create_dom(url)

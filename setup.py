@@ -39,11 +39,13 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
     ],
     zip_safe=True,
     install_requires=[
         'Django>=1.7',
         'BeautifulSoup4',
         'requests',
+        'six',
     ],
 )

@@ -4,6 +4,10 @@ import requests
 from bs4 import BeautifulSoup
 from bs4.element import Tag
 from django.utils.translation import get_language
+import six
+
+if six.PY3:
+    unicode = str
 
 
 class BaseDataProvider(object):
@@ -15,7 +19,7 @@ class BaseDataProvider(object):
     station_model = None
     # various parser stuff
     bg_word = 'background:'
-    without_brackets_re = re.compile(ur'\s*\(.*\)')
+    without_brackets_re = re.compile(r'\s*\(.*\)')
     lang = None
 
     """ main methods
@@ -27,7 +31,7 @@ class BaseDataProvider(object):
             self.lang = get_language()
         else:
             raise AttributeError(
-                u'You need to provide base station and line models'
+                'You need to provide base station and line models'
             )
 
     def download_all(self):
@@ -91,8 +95,8 @@ class BaseDataProvider(object):
 class BaseRuDataProvider(BaseDataProvider):
     """ Basic data provider for ru lang
     """
-    line_word = u'линия'
-    clean_title_re = re.compile(ur'[^а-яА-ЯёЁa-zA-Z0-9\s\.,-_]*', re.U | re.I)
+    line_word = 'линия'
+    clean_title_re = re.compile(r'[^а-яА-ЯёЁa-zA-Z0-9\s\.,-_]*', re.U | re.I)
 
     def prep_title(self, el):
         return self.translit_if_needed(
@@ -116,21 +120,21 @@ class BaseRuDataProvider(BaseDataProvider):
         # reduce requirements
         repl_dict = {
             # upper
-            u'А': u'A', u'Б': u'B', u'В': u'V', u'Г': u'G', u'Д': u'D',
-            u'Е': u'E', u'Ё': u'Yo', u'З': u'Z', u'И': u'I', u'Й': u'Y',
-            u'К': u'K', u'Л': u'L', u'М': u'M', u'Н': u'N', u'О': u'O',
-            u'П': u'P', u'Р': u'R', u'С': u'S', u'Т': u'T', u'У': u'U',
-            u'Ф': u'F', u'Х': u'H', u'Ъ': u'', u'Ы': u'Y', u'Ь': u'',
-            u'Э': u'E', u'Ж': u'Zh',  u'Ц': u'Ts', u'Ч': u'Ch', u'Ш': u'Sh',
-            u'Щ': u'Sch', u'Ю': u'Yu', u'Я': u'Ya',
+            'А': 'A', 'Б': 'B', 'В': 'V', 'Г': 'G', 'Д': 'D',
+            'Е': 'E', 'Ё': 'Yo', 'З': 'Z', 'И': 'I', 'Й': 'Y',
+            'К': 'K', 'Л': 'L', 'М': 'M', 'Н': 'N', 'О': 'O',
+            'П': 'P', 'Р': 'R', 'С': 'S', 'Т': 'T', 'У': 'U',
+            'Ф': 'F', 'Х': 'H', 'Ъ': '', 'Ы': 'Y', 'Ь': '',
+            'Э': 'E', 'Ж': 'Zh',  'Ц': 'Ts', 'Ч': 'Ch', 'Ш': 'Sh',
+            'Щ': 'Sch', 'Ю': 'Yu', 'Я': 'Ya',
             # lower
-            u'а': u'a', u'б': u'b', u'в': u'v', u'г': u'g',
-            u'д': u'd', u'е': u'e', u'ё': u'yo', u'ж': u'zh', u'з': u'z',
-            u'и': u'i', u'й': u'y', u'к': u'k', u'л': u'l', u'м': u'm',
-            u'н': u'n', u'о': u'o', u'п': u'p', u'р': u'r', u'с': u's',
-            u'т': u't', u'у': u'u', u'ф': u'f', u'х': u'h', u'ц': u'ts',
-            u'ч': u'ch', u'ш': u'sh', u'щ': u'sch', u'ъ': u'', u'ы': u'y',
-            u'ь': u'', u'э': u'e', u'ю': u'yu', u'я': u'ya',
+            'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g',
+            'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh', 'з': 'z',
+            'и': 'i', 'й': 'y', 'к': 'k', 'л': 'l', 'м': 'm',
+            'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's',
+            'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'ts',
+            'ч': 'ch', 'ш': 'sh', 'щ': 'sch', 'ъ': '', 'ы': 'y',
+            'ь': '', 'э': 'e', 'ю': 'yu', 'я': 'ya',
         }
         for key in repl_dict:
             s = s.replace(key, repl_dict[key])
@@ -178,8 +182,8 @@ class BaseRuDataProvider(BaseDataProvider):
 class BaseEnDataProvider(BaseDataProvider):
     """ Basic data provider for en lang
     """
-    base_en_url = u'http://en.wikipedia.org'
-    without_sbrackets_re = re.compile(ur'\s*\[.*\]')
+    base_en_url = 'http://en.wikipedia.org'
+    without_sbrackets_re = re.compile(r'\s*\[.*\]')
 
     def prep_title(self, el):
         return self.without_brackets_re.sub(
