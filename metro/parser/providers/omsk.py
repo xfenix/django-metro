@@ -7,7 +7,7 @@ class DataProvider(BaseRuDataProvider):
         # yeap, Omsk
         self.get_or_create_station(
             self.get_or_create_line(
-                1, u'Первая', 'red'
+                1, 'Первая', 'red'
             ),
-            u'Библиотека имени Пушкина'
+            'Библиотека имени Пушкина'
         )

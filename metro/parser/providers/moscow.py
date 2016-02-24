@@ -6,8 +6,8 @@ from metro.parser.base import BaseRuDataProvider
 
 
 class DataProvider(BaseRuDataProvider):
-    metro_lines_src = u"http://ru.wikipedia.org/wiki/Модуль:MoscowMetro#ColorByNum"
-    metro_stations_src = u"http://ru.wikipedia.org/w/index.php?title=\
+    metro_lines_src = "http://ru.wikipedia.org/wiki/Модуль:MoscowMetro#ColorByNum"
+    metro_stations_src = "http://ru.wikipedia.org/w/index.php?title=\
                            Список_станций_Московского_метрополитена"
 
     def download_lines(self):

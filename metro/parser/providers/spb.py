@@ -7,11 +7,11 @@ from metro.parser.base import BaseRuDataProvider
 
 
 class DataProvider(BaseRuDataProvider):
-    metro_data_src = u"http://ru.wikipedia.org/wiki/\
+    metro_data_src = "http://ru.wikipedia.org/wiki/\
                        Линии_и_станции_Петербургского_метрополитена"
-    header_marker = u'линия'
+    header_marker = 'линия'
     skip_from = 6 # 6, 7, 8 lines is under construction
-    title_re = re.compile(ur'.*?(\d{1,2}).*?\((.*?)\)', re.U | re.S)
+    title_re = re.compile(r'.*?(\d{1,2}).*?\((.*?)\)', re.U | re.S)
 
     def download_all(self):
         html = self.create_dom(self.metro_data_src)

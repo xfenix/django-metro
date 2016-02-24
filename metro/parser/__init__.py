@@ -18,5 +18,5 @@ try:
     )
 except ImportError:
     raise NotImplementedError(
-        u'Provider for this city does not implemented'
+        'Provider for this city does not implemented'
     )

@@ -5,5 +5,5 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class MetroConfig(AppConfig):
-    name = u'metro'
-    verbose_name = getattr(settings, 'METRO_APP_TITLE', _(u'Metro'))
+    name = 'metro'
+    verbose_name = getattr(settings, 'METRO_APP_TITLE', _('Metro'))
