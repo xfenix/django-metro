@@ -12,7 +12,7 @@ class DataProvider(BaseRuDataProvider):
 
     def download_lines(self):
         html = self.create_dom(self.metro_lines_src)
-        table = html.find('table')
+        table = html.find('table', 'wikitable')
         for i, row in enumerate(table.find_all('tr')):
             if i == 0:
                 continue
@@ -31,21 +31,22 @@ class DataProvider(BaseRuDataProvider):
 
     def download_stations(self):
         html = self.create_dom(self.metro_stations_src)
-        table = html.find('table', 'wikitable')
+        tables = html.find_all('table', 'standard')
         lines = self.line_model.get_all()
-        for i, row in enumerate(table.find_all('tr')):
-            if i == 0:
-                continue
-            for j, cell in enumerate(row.find_all('td')):
-                if j == 0:
-                    line = 0
-                    value = cell.find('span', 'sortkey').string
-                    if value and value.isdigit():
-                        line = int(value)
-                elif j == 1:
-                    title = cell.find('span').string
-            try:
-                line_inst = lines[line]
-            except KeyError:
-                continue
-            self.get_or_create_station(line_inst, title)
+        for table in tables:
+            for i, row in enumerate(table.find_all('tr')):
+                if i == 0:
+                    continue
+                for j, cell in enumerate(row.find_all('td')):
+                    if j == 0:
+                        line = 0
+                        value = cell.find('span', 'sortkey').string
+                        if value and value.isdigit():
+                            line = int(value)
+                    elif j == 1:
+                        title = cell.find('a').text.strip()
+                try:
+                    line_inst = lines[line]
+                except KeyError:
+                    continue
+                self.get_or_create_station(line_inst, title)

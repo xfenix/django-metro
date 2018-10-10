@@ -1,7 +1,7 @@
 django-metro
 ==============
 
-Metro models for Django (only for 1.7+), plus the parser that fills
+Metro models for Django (for 2+, for django 1.x support use 0.4.2 version), plus the parser that fills
 models with actual data from various data providers (primary - Wikipedia).
 This is renamed django-russian-metro package (!).
 

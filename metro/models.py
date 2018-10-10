@@ -9,7 +9,7 @@ import six
 class MetroLine(models.Model):
     title = models.CharField(
         max_length=255,
-        verbose_name=_('Title')
+        verbose_name=_('Title'),
     )
     color = models.CharField(
         max_length=255,
@@ -20,7 +20,7 @@ class MetroLine(models.Model):
     number = models.IntegerField(
         verbose_name=_('Line number'),
         null=True,
-        blank=True
+        blank=True,
     )
     icon = models.ImageField(
         upload_to='metro/',
@@ -34,12 +34,12 @@ class MetroLine(models.Model):
         items = cls.objects.all()
         result = dict()
         for item in items:
-            result[ item.number ] = item
+            result[item.number] = item
         return result
 
     def get_admin_color(self):
         return '<div style="width: 60px; height: 20px; '\
-                'background: %s"></div>' % self.color
+               'background: %s"></div>' % self.color
     get_admin_color.allow_tags = True
     get_admin_color.short_description = _('Color')
 
@@ -56,11 +56,12 @@ class MetroLine(models.Model):
 class Metro(models.Model):
     line = models.ForeignKey(
         MetroLine,
-        verbose_name=_('Metro line')
+        verbose_name=_('Metro line'),
+        on_delete=models.CASCADE,
     )
     title = models.CharField(
         max_length=255,
-        verbose_name=_('Title')
+        verbose_name=_('Title'),
     )
     order = models.PositiveIntegerField(
         verbose_name=_('Order'),
