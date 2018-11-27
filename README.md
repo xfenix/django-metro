@@ -3,9 +3,8 @@ django-metro
 
 [![PyPI version](https://badge.fury.io/py/django-metro.svg)](https://badge.fury.io/py/django-metro)
 
-Metro models for Django (for 2+, for django 1.x support use 0.4.2 version), plus the parser that fills
+Metro models for Django (for 2+, for django 1.x support use 0.4.2 version), plus parser that fills
 models with actual data from various data providers (primary - Wikipedia).
-This is renamed django-russian-metro package (!).
 
 All russian and cis parsers (like kiev or minsk) respects locale, that's why
 for en locale they returns transliterated version of names.
